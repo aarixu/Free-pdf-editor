@@ -128,7 +128,7 @@ export default function PrivacyPageClient({ locale }: PrivacyPageClientProps) {
                 3.2 Usage Data
               </h3>
               <p className="text-[hsl(var(--color-muted-foreground))] mb-4">
-                We may collect anonymous usage statistics to improve our service, such as:
+                We use Google Analytics to collect anonymous usage data to improve our service. This data may include:
               </p>
               <ul className="list-disc pl-6 space-y-2 text-[hsl(var(--color-muted-foreground))] mb-4">
                 <li>Which tools are most popular</li>
@@ -173,14 +173,15 @@ export default function PrivacyPageClient({ locale }: PrivacyPageClientProps) {
                 6. Third-Party Services
               </h2>
               <p className="text-[hsl(var(--color-muted-foreground))] mb-4">
-                {t('common.brand')} does not share your data with third parties. We do not use:
+                We use the following third-party services:
               </p>
               <ul className="list-disc pl-6 space-y-2 text-[hsl(var(--color-muted-foreground))] mb-4">
-                <li>Third-party analytics that track individual users</li>
-                <li>Advertising networks</li>
-                <li>Social media tracking pixels</li>
-                <li>External file processing services</li>
+                <li><strong>Google Analytics:</strong> We use Google Analytics to track anonymous usage data to understand how our tools are used.</li>
+                <li><strong>Google AdSense:</strong> We display Google AdSense advertisements to support our free service.</li>
               </ul>
+              <p className="text-[hsl(var(--color-muted-foreground))] mb-4">
+                We do not upload or store any files—all processing is done locally in your browser. We do not use external file processing services.
+              </p>
 
               <h2 className="text-2xl font-bold text-[hsl(var(--color-foreground))] mt-8 mb-4">
                 7. Data Security
@@ -224,7 +225,7 @@ export default function PrivacyPageClient({ locale }: PrivacyPageClientProps) {
                 11. Contact Us
               </h2>
               <p className="text-[hsl(var(--color-muted-foreground))] mb-4">
-                If you have any questions about this Privacy Policy, please contact us through our 
+                If you have any questions about this Privacy Policy, please contact us at <strong>privacy@piscis.live</strong> or through our 
                 contact page.
               </p>
             </div>

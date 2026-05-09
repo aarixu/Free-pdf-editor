@@ -3,6 +3,19 @@
   "buildCommand": "npm run build",
   "outputDirectory": "out",
   "framework": null,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.piscis.live"
+        }
+      ],
+      "destination": "https://piscis.live/$1",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

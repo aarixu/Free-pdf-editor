@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import '@/app/globals.css';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
+import CookieBanner from '@/components/CookieBanner';
 
 
 export const metadata: Metadata = {
@@ -61,6 +62,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-background text-foreground antialiased">
         <GoogleAnalytics />
         {children}
+        <CookieBanner />
       </body>
     </html>
   );
