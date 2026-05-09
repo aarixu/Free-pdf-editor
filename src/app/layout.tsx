@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   },
   keywords: ['free pdf tools', 'merge pdf', 'split pdf', 'compress pdf', 'convert pdf', 'pdf editor online', 'free pdf converter'],
   icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
   },
 };
 
@@ -39,6 +39,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="color-scheme" content="light dark" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`} crossOrigin="anonymous"></script>
         <style dangerouslySetInnerHTML={{ __html: 'html{scrollbar-gutter:stable}' }} />
         <script

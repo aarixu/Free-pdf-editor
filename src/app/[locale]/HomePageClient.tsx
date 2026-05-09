@@ -111,8 +111,12 @@ export default function HomePageClient({ locale, localizedToolContent }: HomePag
 
               {/* Hero Title */}
               <h1 id="hero-title" className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-                <span className="text-[hsl(var(--color-foreground))]">{t('home.hero.title')} </span>
-                <span className="text-gradient block mt-1 pb-2">{t('home.hero.highlight')}</span>
+                {t('home.hero.title').split('PDF').map((part, i, arr) => (
+                  <span key={i}>
+                    <span className="text-[hsl(var(--color-foreground))]">{part}</span>
+                    {i < arr.length - 1 && <span className="text-gradient">PDF</span>}
+                  </span>
+                ))}
               </h1>
 
               {/* Hero Subtitle */}
