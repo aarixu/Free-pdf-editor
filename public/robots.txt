@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://piscis.live/sitemap.xml

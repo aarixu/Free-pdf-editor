@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { Tool, ToolCategory, CATEGORY_INFO } from '@/types/tool';
 import { ToolCard } from './ToolCard';
+import { AdBanner } from '../AdBanner';
 
 export interface ToolGridProps {
   /** Array of tools to display */
@@ -142,6 +143,12 @@ export function ToolGrid({
                   />
                 ))}
               </div>
+              {/* Insert AdBanner after the second category ('convert-to-pdf' is typically 2nd or 3rd, we can just check if index === 1) */}
+              {cat === 'convert-to-pdf' && (
+                <div className="mt-8">
+                  <AdBanner slotId={process.env.NEXT_PUBLIC_AD_SLOT_GRID || ''} />
+                </div>
+              )}
             </section>
           );
         })}
@@ -155,13 +162,19 @@ export function ToolGrid({
       className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ${className}`}
       data-testid="tool-grid"
     >
-      {filteredTools.map(tool => (
-        <ToolCard
-          key={tool.id}
-          tool={tool}
-          locale={locale}
-          localizedContent={localizedToolContent?.[tool.id]}
-        />
+      {filteredTools.map((tool, index) => (
+        <React.Fragment key={tool.id}>
+          <ToolCard
+            tool={tool}
+            locale={locale}
+            localizedContent={localizedToolContent?.[tool.id]}
+          />
+          {index === 7 && (
+            <div className="col-span-1 sm:col-span-2 lg:col-span-3 xl:col-span-4">
+              <AdBanner slotId={process.env.NEXT_PUBLIC_AD_SLOT_GRID || ''} />
+            </div>
+          )}
+        </React.Fragment>
       ))}
     </div>
   );

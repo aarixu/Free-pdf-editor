@@ -1,17 +1,17 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.services.pdfcraft;
+  cfg = config.services.freepdf;
 in
 {
-  options.services.pdfcraft = {
-    enable = lib.mkEnableOption "PDFCraft - Professional PDF Tools";
+  options.services.freepdf = {
+    enable = lib.mkEnableOption "FreePDF - Professional PDF Tools";
 
     package = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.pdfcraft;
-      defaultText = lib.literalExpression "pkgs.pdfcraft";
-      description = "The PDFCraft package to use.";
+      default = pkgs.freepdf;
+      defaultText = lib.literalExpression "pkgs.freepdf";
+      description = "The FreePDF package to use.";
     };
 
     port = lib.mkOption {
@@ -24,18 +24,18 @@ in
   config = lib.mkIf cfg.enable {
     nixpkgs.overlays = [
       (final: prev: {
-        pdfcraft = final.callPackage ./package.nix { };
+        freepdf = final.callPackage ./package.nix { };
       })
     ];
 
-    systemd.user.services.pdfcraft = {
+    systemd.user.services.freepdf = {
       Unit = {
-        Description = "PDFCraft PDF Tools";
+        Description = "FreePDF PDF Tools";
         After = [ "network.target" ];
       };
 
       Service = {
-        ExecStart = "${cfg.package}/bin/pdfcraft";
+        ExecStart = "${cfg.package}/bin/freepdf";
         Restart = "on-failure";
         Environment = [
           "PDFCRAFT_PORT=${toString cfg.port}"

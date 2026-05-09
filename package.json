@@ -1,6 +1,9 @@
 {
-  "name": "pdfcraft",
+  "name": "freepdf",
   "version": "0.1.0",
+  "description": "Professional PDF Tools - Free, Private & Browser-Based",
+  "author": "FreePDF",
+  "homepage": "https://piscis.live",
   "private": true,
   "type": "module",
   "scripts": {

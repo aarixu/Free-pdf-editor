@@ -1,5 +1,5 @@
 {
-  "productName": "PDFCraft",
+  "productName": "FreePDF",
   "version": "0.1.0",
   "identifier": "com.pdfcraft.app",
   "build": {
@@ -11,7 +11,7 @@
   "app": {
     "windows": [
       {
-        "title": "PDFCraft",
+        "title": "FreePDF",
         "width": 1200,
         "height": 800
       }

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowRight, Zap, Wrench, Lock, Sparkles, Edit, FileImage, FolderOpen, Settings, ShieldCheck, Star } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { AdBanner } from '@/components/AdBanner';
 import { ToolGrid } from '@/components/tools/ToolGrid';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -211,6 +212,8 @@ export default function HomePageClient({ locale, localizedToolContent }: HomePag
           </div>
         </section>
 
+        <AdBanner slotId={process.env.NEXT_PUBLIC_AD_SLOT_HERO || ''} />
+
         {/* Tool Categories Section */}
         <section className="py-16 bg-[hsl(var(--color-muted)/0.3)]" aria-labelledby="categories-heading">
           <div className="container mx-auto px-4">
@@ -302,6 +305,8 @@ export default function HomePageClient({ locale, localizedToolContent }: HomePag
             </div>
           </div>
         </section>
+
+        <AdBanner slotId={process.env.NEXT_PUBLIC_AD_SLOT_FOOTER || ''} />
       </main>
 
       <Footer locale={locale} />

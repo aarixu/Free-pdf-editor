@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/Card';
 import { getToolById } from '@/config/tools';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { AdBanner } from '@/components/AdBanner';
 import { type Locale } from '@/lib/i18n/config';
 import { ToolProvider } from '@/lib/contexts/ToolContext';
 import { getToolIcon } from '@/config/icons';
@@ -94,6 +95,10 @@ export function ToolPage({ tool, content, locale, children, localizedRelatedTool
             {/* Tool Header */}
             <ToolHeader tool={tool} content={content} />
 
+            <div className="mt-8">
+              <AdBanner slotId={process.env.NEXT_PUBLIC_AD_SLOT_TOOL_TOP || ''} />
+            </div>
+
             {/* Tool Interface Area */}
             <section
               className="mt-6"
@@ -102,6 +107,10 @@ export function ToolPage({ tool, content, locale, children, localizedRelatedTool
             >
               {children}
             </section>
+
+            <div className="mt-8 mb-4">
+              <AdBanner slotId={process.env.NEXT_PUBLIC_AD_SLOT_TOOL_BOTTOM || ''} />
+            </div>
 
             {/* Description Section */}
             <DescriptionSection description={content.description} />

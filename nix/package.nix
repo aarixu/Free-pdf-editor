@@ -11,7 +11,7 @@ let
 
   # Phase 1: Fetch npm dependencies (fixed-output derivation)
   npmDeps = stdenv.mkDerivation {
-    pname = "pdfcraft-npm-deps";
+    pname = "freepdf-npm-deps";
     version = "0.1.0";
 
     src = lib.cleanSourceWith {
@@ -39,8 +39,8 @@ let
   };
 
   # Phase 2: Build the static site (FOD — allows network for next/font Google Fonts download)
-  pdfcraft-static = stdenv.mkDerivation {
-    pname = "pdfcraft-static";
+  freepdf-static = stdenv.mkDerivation {
+    pname = "freepdf-static";
     version = "0.1.0";
 
     src = lib.cleanSourceWith {
@@ -102,7 +102,7 @@ let
 
 in
 stdenv.mkDerivation {
-  pname = "pdfcraft";
+  pname = "freepdf";
   version = "0.1.0";
 
   dontUnpack = true;
@@ -110,7 +110,7 @@ stdenv.mkDerivation {
   nativeBuildInputs = [ gzip ];
 
   installPhase = let
-    nginxConf = builtins.toFile "pdfcraft-nginx.conf" ''
+    nginxConf = builtins.toFile "freepdf-nginx.conf" ''
       daemon off;
       worker_processes 1;
       error_log /dev/stderr;
@@ -196,12 +196,12 @@ stdenv.mkDerivation {
     runHook preInstall
 
     # Install static files
-    mkdir -p $out/share/pdfcraft
-    cp -r ${pdfcraft-static}/* $out/share/pdfcraft/
+    mkdir -p $out/share/freepdf
+    cp -r ${freepdf-static}/* $out/share/freepdf/
 
     # Decompress LibreOffice WASM .gz files
-    if [ -d $out/share/pdfcraft/libreoffice-wasm ]; then
-      cd $out/share/pdfcraft/libreoffice-wasm
+    if [ -d $out/share/freepdf/libreoffice-wasm ]; then
+      cd $out/share/freepdf/libreoffice-wasm
       for f in *.gz; do
         if [ -f "$f" ]; then
           ${gzip}/bin/gzip -dk "$f" || true
@@ -210,40 +210,40 @@ stdenv.mkDerivation {
     fi
 
     # Install nginx config
-    mkdir -p $out/etc/pdfcraft
-    sed -e "s|PDFCRAFT_ROOT|$out/share/pdfcraft|g" \
+    mkdir -p $out/etc/freepdf
+    sed -e "s|PDFCRAFT_ROOT|$out/share/freepdf|g" \
         -e "s|NGINX_MIME_TYPES|${nginx}/conf/mime.types|g" \
-        ${nginxConf} > $out/etc/pdfcraft/nginx.conf
+        ${nginxConf} > $out/etc/freepdf/nginx.conf
 
     # Install run script
     mkdir -p $out/bin
-    cat > $out/bin/pdfcraft <<'WRAPPER'
+    cat > $out/bin/freepdf <<'WRAPPER'
 #!/bin/sh
 PDFCRAFT_PORT=''${PDFCRAFT_PORT:-3000}
-PDFCRAFT_CONF="@out@/etc/pdfcraft/nginx.conf"
-RUNTIME_CONF=$(mktemp /tmp/pdfcraft-nginx.XXXXXX.conf)
+PDFCRAFT_CONF="@out@/etc/freepdf/nginx.conf"
+RUNTIME_CONF=$(mktemp /tmp/freepdf-nginx.XXXXXX.conf)
 
 sed "s|listen 3000|listen $PDFCRAFT_PORT|g" "$PDFCRAFT_CONF" > "$RUNTIME_CONF"
 
 trap "rm -f $RUNTIME_CONF" EXIT
 
-echo "PDFCraft running at http://localhost:$PDFCRAFT_PORT"
+echo "FreePDF running at http://localhost:$PDFCRAFT_PORT"
 exec @nginx@/bin/nginx -c "$RUNTIME_CONF"
 WRAPPER
 
-    substituteInPlace $out/bin/pdfcraft \
+    substituteInPlace $out/bin/freepdf \
       --replace-fail "@out@" "$out" \
       --replace-fail "@nginx@" "${nginx}"
-    chmod +x $out/bin/pdfcraft
+    chmod +x $out/bin/freepdf
 
     runHook postInstall
   '';
 
   meta = with lib; {
-    description = "PDFCraft - Professional PDF Tools, Free, Private & Browser-Based";
-    homepage = "https://github.com/PDFCraftTool/pdfcraft";
+    description = "FreePDF - Professional PDF Tools, Free, Private & Browser-Based";
+    homepage = "https://github.com/FreePDFTool/freepdf";
     license = licenses.agpl3Only;
     platforms = [ "x86_64-linux" "aarch64-linux" ];
-    mainProgram = "pdfcraft";
+    mainProgram = "freepdf";
   };
 }

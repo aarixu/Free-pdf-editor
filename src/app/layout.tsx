@@ -2,8 +2,25 @@ import type { Metadata } from 'next';
 import '@/app/globals.css';
 
 export const metadata: Metadata = {
-  title: 'PDFCraft - Professional PDF Tools',
-  description: 'Free online PDF tools for merging, splitting, compressing, and converting PDF files. All processing happens in your browser for maximum privacy.',
+  title: {
+    default: 'FreePDF — 90+ Free PDF Tools Online',
+    template: '%s | FreePDF'
+  },
+  description: 'FreePDF gives you 90+ professional PDF tools completely free. Merge, split, compress, convert and edit PDFs — no signup, no limits, 100% private and browser-based.',
+  metadataBase: new URL('https://piscis.live'),
+  alternates: {
+    canonical: 'https://piscis.live'
+  },
+  openGraph: {
+    siteName: 'FreePDF',
+    images: ['/images/og-image.png'],
+    type: 'website'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@FreePDFHub'
+  },
+  keywords: ['free pdf tools', 'merge pdf', 'split pdf', 'compress pdf', 'convert pdf', 'pdf editor online', 'free pdf converter'],
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
@@ -22,6 +39,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="color-scheme" content="light dark" />
+        <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`} crossOrigin="anonymous"></script>
         <style dangerouslySetInnerHTML={{ __html: 'html{scrollbar-gutter:stable}' }} />
         <script
           dangerouslySetInnerHTML={{

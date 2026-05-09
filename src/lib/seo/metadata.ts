@@ -157,11 +157,36 @@ export function generateToolMetadata(options: ToolMetadataOptions): Metadata {
     'private',
   ];
 
+  // Apply SEO patterns for English
+  let finalTitle = content.title;
+  let finalDesc = content.metaDescription;
+  
+  if (locale === 'en') {
+    if (!finalTitle.includes('Free Online')) {
+      finalTitle = `${finalTitle} Free Online`;
+    }
+    if (!finalDesc.includes('Free,')) {
+      // Clean up description ending
+      let base = finalDesc.trim();
+      if (!base.endsWith('.')) base += '.';
+      
+      // Alternate suffixes for variety
+      const suffixes = [
+        " Free, no signup, 100% browser-based.",
+        " Free tool, no upload to servers.",
+        " Free online PDF tool, 100% private."
+      ];
+      // Use tool slug to deterministically pick a suffix
+      const suffixIndex = tool.slug.length % suffixes.length;
+      finalDesc = `${base}${suffixes[suffixIndex]}`;
+    }
+  }
+
   return generateBaseMetadata({
     locale,
     path,
-    title: content.title,
-    description: content.metaDescription,
+    title: finalTitle,
+    description: finalDesc,
     keywords: enhancedKeywords,
   });
 }
